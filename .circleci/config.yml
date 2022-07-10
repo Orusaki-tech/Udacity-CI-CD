@@ -23,16 +23,15 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:  mkdir -p workspace
+      - run: mkdir -p workspace
       - run:
           name: "save-hello"
-          command:  echo "Hello, World!" > workspace/output.txt
-       
+          command: echo "Hello, World!" > output.txt
+
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: workspace
           paths:
             - output.txt
-             
 
   print_output_file:
     docker:
@@ -41,13 +40,11 @@ jobs:
       - checkout
       - attach_workspace:
           at: /tmp/workspace
-      
+
       - run:
           name: "print-output"
-          command: | 
+          command: |
             cat output.txt
-
-
 
 # this env var must be set within the project
 # Invoke jobs via workflows
