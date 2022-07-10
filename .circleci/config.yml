@@ -39,10 +39,8 @@ jobs:
   print_output_file:
     executor: my-executor
     steps:
-      - checkout
       - attach_workspace:
           at: ~/
-
       - run:
           name: "print-output"
           command: |
