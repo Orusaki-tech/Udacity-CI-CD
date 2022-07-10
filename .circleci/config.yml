@@ -4,6 +4,12 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+executors: 
+  docker:
+      - image: circleci/node:13.8.0
+  my-executor:
+    working_directory: /tmp
+
 jobs:
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -19,14 +25,13 @@ jobs:
           command: "echo Hello, World!"
 
   save_hello_world_output:
-    docker:
-      - image: circleci/node:13.8.0
+    executor: my-executor
     steps:
       - checkout
       - run: mkdir -p workspace
       - run:
           name: "save-hello"
-          command: echo "Hello, World!" > output.txt
+          command: echo "Hello, World!" > workspace/echo-output
 
       - persist_to_workspace:
           root: workspace
@@ -34,8 +39,7 @@ jobs:
             - output.txt
 
   print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
+    executor: my-executor
     steps:
       - checkout
       - attach_workspace:
