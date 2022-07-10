@@ -28,13 +28,13 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      - run: mkdir -p workspace
+      
       - run:
           name: "save-hello"
-          command: echo "Hello, World!" > workspace/echo-output
+          command: echo "Hello, World!" > echo-output
 
       - persist_to_workspace:
-          root: workspace
+          root: ~/
           paths:
             - echo-output
 
@@ -43,12 +43,12 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/workspace
+          at: ~/
 
       - run:
           name: "print-output"
           command: |
-            cat ~/echo-output
+            cat echo-output
 
 # this env var must be set within the project
 # Invoke jobs via workflows
