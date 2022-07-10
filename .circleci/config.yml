@@ -48,7 +48,7 @@ jobs:
       - run:
           name: "print-output"
           command: |
-            cat output.txt
+            cat echo-output
 
 # this env var must be set within the project
 # Invoke jobs via workflows
