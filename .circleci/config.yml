@@ -34,7 +34,7 @@ jobs:
           command: echo "Hello, World!" > workspace/echo-output
 
       - persist_to_workspace:
-          root: ~/workspace
+          root: workspace
           paths:
             - echo-output
 
