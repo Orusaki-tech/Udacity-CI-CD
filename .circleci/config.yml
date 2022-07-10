@@ -7,7 +7,6 @@ version: 2.1
 executors: 
   
   my-executor:
-    
     docker:
           - image: circleci/node:13.8.0
 jobs:
@@ -28,10 +27,9 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      
       - run:
           name: "save-hello"
-          command: echo "Hello, World!" > echo-output
+          command: echo "Hello, World!" > ~/echo-output
 
       - persist_to_workspace:
           root: ~/
