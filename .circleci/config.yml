@@ -28,7 +28,7 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-     
+      - run: mkdir -p workspace
       - run:
           name: "save-hello"
           command: echo "Hello, World!" > workspace/echo-output
@@ -36,7 +36,7 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths:
-            - output.txt
+            - echo-output
 
   print_output_file:
     executor: my-executor
