@@ -8,12 +8,8 @@ version: 2.1
 commands:
   print_pipeline_id:
     description: Prints the Circle CI Workflow ID from its environment variables
-    parameters:
-      id:
-        type: string
-        
     steps:
-       - run: echo <<parameters.id>>
+       - run: echo ${CIRCLE_WORKFLOW_ID}
 
 executors:
   my-executor:
@@ -32,8 +28,7 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-      - print_pipeline_id:
-          id: <<parameters.id>>
+      - print_pipeline_id
 
   save_hello_world_output:
     executor: my-executor
